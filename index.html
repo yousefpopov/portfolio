@@ -698,7 +698,10 @@ const DATA={
     role:'Автор и исполнитель. Идея, AI-генерация, монтаж.',
     task:'Показать как обычный бизнес выглядит через призму культовой вселенной. Нестандартный взгляд на привычное.',
     solution:'Магазин дверей → Корпорация монстров. Автошкола → Вин Дизель. Магазин костюмов → Джон Уик. Использовал Nano Banana Pro для генерации изображений и Kling AI для анимации и видео. Один ролик набрал 463 000 просмотров.',
-    metrics:[{v:'463K',l:'просмотров'},{v:'Nano Banana',l:'+ Kling AI'}]
+    metrics:[{v:'463K',l:'просмотров'},{v:'Nano Banana',l:'+ Kling AI'}],
+    gallery:[
+      {type:'video',src:'https://yousefpopov.github.io/videos/ai-1.webm'}
+    ]
   }
 }
 
@@ -721,10 +724,10 @@ function openM(id){
           ? `<video class="${i===0?'active':''}" autoplay loop muted playsinline><source src="${item.src}" type="video/mp4"></video>`
           : `<img class="${i===0?'active':''}" src="${item.src}" alt="">`
         ).join('')}
-        <div class="g-nav">
+        ${c.gallery.length > 1 ? `<div class="g-nav">
           <button class="g-btn" onclick="event.stopPropagation();gNav(-1)">‹</button>
           <button class="g-btn" onclick="event.stopPropagation();gNav(1)">›</button>
-        </div>
+        </div>` : ''}
       </div>
       ${c.gallery.length > 1 ? `<div class="gallery-thumbs" id="g-thumbs">
         ${c.gallery.map((item,i) => `
