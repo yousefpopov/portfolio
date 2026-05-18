@@ -211,6 +211,7 @@ h1 span{color:var(--tertiary)}
 #lb.open{display:flex}
 @keyframes lbIn{from{opacity:0}to{opacity:1}}
 #lb-img{max-width:92vw;max-height:90vh;border-radius:8px;object-fit:contain;box-shadow:0 8px 60px rgba(0,0,0,.7);cursor:zoom-out}
+#lb-video{max-width:92vw;max-height:90vh;border-radius:8px;box-shadow:0 8px 60px rgba(0,0,0,.7);display:none;outline:none}
 #lb-close{position:fixed;top:20px;right:24px;background:rgba(255,255,255,.12);border:none;color:#fff;font-size:26px;width:44px;height:44px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s}
 #lb-close:hover{background:rgba(255,255,255,.25)}
 #lb-prev,#lb-next{position:fixed;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.2);border:2px solid rgba(255,255,255,.3);color:#fff;font-size:32px;width:56px;height:56px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s;text-shadow:0 2px 8px rgba(0,0,0,.8)}
@@ -807,15 +808,29 @@ let lbSrcs=[], lbIdx=0;
 function lbOpen(){
   const main=document.getElementById('g-main');
   if(!main)return;
-  const imgs=main.querySelectorAll('img');
-  lbSrcs=Array.from(imgs).map(i=>i.src);
+  const els=main.querySelectorAll('img, video');
+  lbSrcs=Array.from(els).map(el=>({src:el.src||el.querySelector('source')?.src||el.currentSrc, type:el.tagName==='VIDEO'?'video':'image'}));
   lbIdx=gIndex;
   lbShow();
   document.getElementById('lb').classList.add('open');
 }
 function lbShow(){
   const img=document.getElementById('lb-img');
-  img.src=lbSrcs[lbIdx];
+  const vid=document.getElementById('lb-video');
+  const item=lbSrcs[lbIdx];
+  const src=typeof item==='string'?item:item.src;
+  const isVideo=typeof item==='object'&&item.type==='video';
+  if(isVideo){
+    img.style.display='none';
+    vid.style.display='block';
+    vid.src=src;
+    vid.play();
+  } else {
+    vid.style.display='none';
+    vid.pause();
+    img.style.display='block';
+    img.src=src;
+  }
   document.getElementById('lb-counter').textContent=(lbIdx+1)+' / '+lbSrcs.length;
   const prev=document.getElementById('lb-prev');
   const next=document.getElementById('lb-next');
@@ -828,6 +843,8 @@ function lbNav(dir){
 }
 function lbClose(){
   document.getElementById('lb').classList.remove('open');
+  const vid=document.getElementById('lb-video');
+  if(vid) vid.pause();
 }
 
 // Свайп в лайтбоксе — инициализация после загрузки DOM
@@ -850,6 +867,7 @@ document.addEventListener('DOMContentLoaded', function(){
 </script>
 <div id="lb" onclick="if(event.target===this)lbClose()">
   <img id="lb-img" src="" onclick="lbClose()" alt="">
+  <video id="lb-video" controls playsinline></video>
   <button id="lb-close" onclick="lbClose()">✕</button>
   <button id="lb-prev" onclick="lbNav(-1)">‹</button>
   <button id="lb-next" onclick="lbNav(1)">›</button>
