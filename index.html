@@ -184,6 +184,10 @@ h1 span{color:var(--tertiary)}
   display:flex;align-items:center;justify-content:space-between;
   padding:16px 36px 24px;
   border-top:1px solid var(--border);
+  position:sticky;bottom:0;
+  background:var(--surface);
+  z-index:10;
+  box-shadow:0 -1px 0 var(--border);
 }
 .mdl-nav-btn{
   font-size:13px;font-weight:500;color:var(--accent);
@@ -193,15 +197,6 @@ h1 span{color:var(--tertiary)}
 }
 .mdl-nav-btn:hover{background:#deedfb}
 .mdl-nav-counter{font-size:12px;color:var(--tertiary)}
-@media(max-width:600px){
-  .mdl-nav{
-    position:sticky;bottom:0;
-    background:var(--surface);
-    padding:12px 20px 20px;
-    z-index:10;
-    box-shadow:0 -1px 0 var(--border);
-  }
-}
 
 
 /* GALLERY */
@@ -395,7 +390,7 @@ h1 span{color:var(--tertiary)}
       <a class="c-link" onclick="event.stopPropagation();openM('mono')">Подробнее <span class="arr">→</span></a>
     </div>
     <div class="c-card reveal" data-filter="freelance" onclick="openM('sens')">
-      <div class="c-preview" style="background:linear-gradient(135deg,#FDF6EE,#F5DDBB)"><span class="placeholder-icon">☕</span></div>
+      <div class="c-preview" style="background:#eee"><img src="https://yousefpopov.github.io/images/sens-cover.jpg" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0"></div>
       <div class="c-tags"><span class="c-tag hi">Фриланс</span><span class="c-tag">Framer</span><span class="c-tag">English</span><span class="c-tag">Startup</span></div>
       <div class="c-name">SENS Robo Cafe</div>
       <p class="c-desc">Премиальный сайт для американского стартапа — автоматизированные кофе-станции от $99K. Продающий лендинг на Framer для международного рынка.</p>
