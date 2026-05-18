@@ -251,8 +251,14 @@ h1 span{color:var(--tertiary)}
   nav{padding:0 20px}
   .nav-links{display:none}
   h1{letter-spacing:-2px}
-  .hero-stats{display:grid;grid-template-columns:1fr 1fr;border-radius:var(--r)}
+  .hero{min-height:100svh;padding:80px 24px 40px;justify-content:flex-start}
+  .hero-photo-wrap{width:120px;height:120px;margin-bottom:16px}
+  .hero-greeting{font-size:17px;margin-bottom:10px}
+  h1{font-size:clamp(28px,8vw,48px);margin-bottom:14px}
+  .hero-sub{font-size:15px;margin-bottom:28px}
+  .hero-stats{display:grid;grid-template-columns:1fr 1fr;border-radius:var(--r);margin-bottom:24px}
   .stat{border-right:none;border-bottom:1px solid var(--border)}
+  .stat{padding:14px 16px}
   .stat:nth-child(1),.stat:nth-child(2){border-bottom:1px solid var(--border)}
   .stat:nth-child(1){border-right:1px solid var(--border)}
   .stat:nth-child(3){border-right:1px solid var(--border)}
