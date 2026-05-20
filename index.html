@@ -727,7 +727,6 @@ function openM(id){
     ${c.gallery && c.gallery.length > 0 ? `<button class="mdl-x" onclick="closeM()" style="position:absolute;top:14px;right:14px;z-index:10">✕</button>` : ''}
     <div class="mdl-body" style="${c.gallery && c.gallery.length > 0 ? 'padding-top:36px' : ''}">
       ${gallery}
-      <div class="mdl-tags"><span class="c-tag">${c.tag}</span></div>
       <div class="mdl-h">${c.title}</div>
       ${c.nda?'<div class="mdl-nda">⚠️ Проект под NDA — детальные визуалы показываю на встрече по запросу.</div>':''}
       <div class="mdl-s"><div class="mdl-sl">Роль</div><p>${c.role}</p></div>
